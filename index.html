@@ -165,6 +165,8 @@
   .phone svg{width:22px;height:22px;color:var(--saffron)}
   .phone b{display:block;font-size:24px;font-weight:800;letter-spacing:.02em}
   .phone small{color:#a9bccd;font-size:13px}
+  .fork{background:#fff;padding:12px;min-height:640px}
+  .fork iframe{display:block;width:100%;height:640px;border:0}
   form.rsv{padding:clamp(28px,4vw,48px);display:grid;grid-template-columns:1fr 1fr;gap:16px}
   .field{display:grid;gap:7px}
   .field.full{grid-column:1/-1}
@@ -304,7 +306,7 @@
       <a href="#sangria">Sangría</a>
       <a href="#eventos" class="hide-md">Eventos</a>
       <a href="#contacto" class="hide-md">Contacto</a>
-      <a class="btn btn-red" href="#reservar">Reservar<span class="long">&nbsp;mesa</span></a>
+      <a class="btn btn-red" href="#reservar">Reservar<span class="long"> mesa</span></a>
     </nav>
   </div>
 </header>
@@ -318,7 +320,7 @@
       <h1 id="hero-title" class="reveal d1">Cocina casera valenciana <em>a un paso del mar</em></h1>
       <p class="reveal d2">Arroces, bandejas de fritura y marisco, tapas caseras y nuestra sangría de cava artesana. Todo hecho por nosotros, con ingredientes naturales, en el corazón de El Cabañal.</p>
       <div class="actions reveal d3">
-        <a class="btn btn-wa" href="https://wa.me/34623232324" target="_blank" rel="noopener noreferrer"><svg><use href="#i-wa"/></svg>Reservar por WhatsApp</a>
+        <a class="btn btn-red" href="#reservar">Reservar mesa</a>
         <a class="btn btn-ghost" href="https://carta.powerup.menu/taberna-casera" target="_blank" rel="noopener noreferrer"><svg><use href="#i-menu"/></svg>Ver la carta</a>
       </div>
       <div class="awards reveal d3">
@@ -422,28 +424,13 @@
         <div class="reserve-info">
           <span class="kicker">Reservas</span>
           <h2 id="rsv-title">Reserva tu mesa <em>en un minuto</em></h2>
-          <p>Rellena los datos y te abrimos WhatsApp con el mensaje ya escrito. Si quieres paella, dinos cuál y te la tenemos preparada.</p>
-          <a class="phone" href="tel:+34623232324"><span><svg><use href="#i-phone"/></svg></span><div><b>623 23 23 24</b><small>También por teléfono · José Luis</small></div></a>
+          <p>Elige día, hora y número de personas y recibirás la confirmación al momento. Si prefieres, también puedes reservar por teléfono o WhatsApp: dinos qué arroz o paella queréis y os la tenemos preparada.</p>
+          <a class="phone" href="tel:+34623232324"><span><svg><use href="#i-phone"/></svg></span><div><b>623 23 23 24</b><small>Teléfono y WhatsApp · José Luis</small></div></a>
+          <a class="btn btn-wa" style="margin-top:22px" href="https://wa.me/34623232324?text=Hola%2C%20quiero%20hacer%20una%20reserva." target="_blank" rel="noopener noreferrer"><svg><use href="#i-wa"/></svg>Reservar por WhatsApp</a>
         </div>
-        <form class="rsv" id="rsv" novalidate>
-          <div class="field full"><label for="f-name">Nombre y apellidos</label><input id="f-name" name="name" autocomplete="name" required></div>
-          <div class="field"><label for="f-adults">Adultos</label><input id="f-adults" name="adults" type="number" min="1" max="100" value="2" inputmode="numeric"></div>
-          <div class="field"><label for="f-kids">Niños</label><input id="f-kids" name="kids" type="number" min="0" max="50" value="0" inputmode="numeric"></div>
-          <div class="field"><label for="f-date">Día</label><input id="f-date" name="date" type="date" required></div>
-          <div class="field"><label for="f-time">Hora</label>
-            <select id="f-time" name="time">
-              <option>13:30</option><option>14:00</option><option selected>14:30</option><option>15:00</option><option>15:30</option>
-              <option>20:30</option><option>21:00</option><option>21:30</option><option>22:00</option><option>22:30</option>
-            </select>
-          </div>
-          <div class="field full"><label for="f-rice">¿Qué arroz o paella queréis? (opcional)</label>
-            <select id="f-rice" name="rice">
-              <option value="">Todavía no lo sé</option><option>Paella valenciana</option><option>Paella de marisco</option><option>Arroz negro</option><option>Arroz meloso</option><option>Otro (lo comento por WhatsApp)</option>
-            </select>
-          </div>
-          <button class="btn btn-wa" type="submit"><svg><use href="#i-wa"/></svg>Enviar reserva por WhatsApp</button>
-          <p class="form-note" id="f-note">Los lunes cerramos. Te confirmamos la reserva por WhatsApp.</p>
-        </form>
+        <div class="fork">
+          <iframe src="https://widget.thefork.com/ef68c48d-29fa-484d-99e6-a2577333a6ea" allow="payment *" title="Reservar mesa en La Taberna Casera con TheFork" loading="lazy"></iframe>
+        </div>
       </div>
     </div>
   </section>
@@ -516,23 +503,6 @@
   }
   addEventListener('scroll',onScroll,{passive:true}); onScroll();
 
-  /* formulario de reserva -> WhatsApp */
-  var f=document.getElementById('rsv'), d=document.getElementById('f-date'), note=document.getElementById('f-note');
-  var t=new Date(); t.setMinutes(t.getMinutes()-t.getTimezoneOffset()); d.min=t.toISOString().slice(0,10);
-  f.addEventListener('submit',function(e){
-    e.preventDefault();
-    var name=f.name.value.trim(), date=f.date.value;
-    if(!name||!date){ note.textContent='Por favor, indica tu nombre y el día de la reserva.'; note.style.color='#c8512e'; (name?f.date:f.name).focus(); return; }
-    if(new Date(date+'T12:00').getDay()===1){ note.textContent='Los lunes estamos cerrados. Elige otro día, por favor.'; note.style.color='#c8512e'; f.date.focus(); return; }
-    var dd=date.split('-').reverse().join('/');
-    var msg='Hola, quiero hacer una reserva:%0A'+
-      '• Nombre: '+encodeURIComponent(name)+'%0A'+
-      '• Adultos: '+encodeURIComponent(f.adults.value||'0')+' · Niños: '+encodeURIComponent(f.kids.value||'0')+'%0A'+
-      '• Día: '+dd+' a las '+encodeURIComponent(f.time.value)+
-      (f.rice.value?'%0A• Arroz: '+encodeURIComponent(f.rice.value):'');
-    note.textContent='Abriendo WhatsApp…'; note.style.color='';
-    window.open('https://wa.me/34623232324?text='+msg,'_blank','noopener');
-  });
 
   document.querySelectorAll('.hero .reveal').forEach(function(e){requestAnimationFrame(function(){e.classList.add('in')})});
   var els=document.querySelectorAll('.reveal:not(.in)');
