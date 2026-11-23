@@ -76,6 +76,9 @@
   .links{display:flex;align-items:center;gap:28px}
   .links a:not(.btn){text-decoration:none;font-weight:600;font-size:15px;color:var(--ink);white-space:nowrap}
   .links a:not(.btn):hover{color:var(--paprika)}
+  .links a.ig-link{display:inline-grid;place-items:center;width:42px;height:42px;border-radius:50%;border:1.5px solid var(--line);color:var(--navy)}
+  .links a.ig-link:hover{background:var(--navy);border-color:var(--navy);color:#fff}
+  .links a.ig-link svg{width:20px;height:20px}
   .links .btn{min-height:46px;padding:0 20px;font-size:14.5px}
 
   /* hero */
@@ -313,7 +316,7 @@
 <div class="topbar">
   <div class="wrap">
     <span>🎉 <b>Abrimos todos los festivos</b> · A pocos metros de la playa</span>
-    <span class="tb-r"><a href="tel:+34623232324">623 23 23 24</a><a href="mailto:latabernacaseracabanyal@gmail.com">latabernacaseracabanyal@gmail.com</a></span>
+    <span class="tb-r"><a href="https://www.instagram.com/latabernacaseravalencia/" target="_blank" rel="noopener noreferrer">@latabernacaseravalencia</a><a href="tel:+34623232324">623 23 23 24</a><a href="mailto:latabernacaseracabanyal@gmail.com">latabernacaseracabanyal@gmail.com</a></span>
   </div>
 </div>
 
@@ -325,6 +328,7 @@
       <a href="#sangria">Sangría</a>
       <a href="#eventos" class="hide-md">Eventos</a>
       <a href="#contacto" class="hide-md">Contacto</a>
+      <a class="ig-link" href="https://www.instagram.com/latabernacaseravalencia/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de La Taberna Casera"><svg><use href="#i-ig"/></svg></a>
       <a class="btn btn-red" href="#reservar">Reservar<span class="long"> mesa</span></a>
     </nav>
   </div>
@@ -493,7 +497,7 @@
 <footer>
   <div class="wrap">
     <a class="brand" href="#inicio"><img src="img/logo.png" alt="" width="54" height="54"><span>La Taberna Casera<small>El Cabañal · Valencia</small></span></a>
-    <nav aria-label="Pie de página"><a href="#carta">Carta</a><a href="#sangria">Sangría</a><a href="#eventos">Eventos</a><a href="#reservar">Reservar</a><a href="#contacto">Contacto</a></nav>
+    <nav aria-label="Pie de página"><a href="#carta">Carta</a><a href="#sangria">Sangría</a><a href="#eventos">Eventos</a><a href="#reservar">Reservar</a><a href="#contacto">Contacto</a><a href="https://www.instagram.com/latabernacaseravalencia/" target="_blank" rel="noopener noreferrer">Instagram</a></nav>
     <p class="copy">© <span id="year">2026</span> La Taberna Casera · Calle Antonio Juan, 10 · 46011 Valencia</p>
   </div>
 </footer>
